@@ -1,5 +1,6 @@
 import { Quest } from "@/apis/quests/types"
-import QuestTag from "@/app/_components/QuestTag"
+import QuestLevel from "@/components/QuestLevel"
+import QuestTag from "@/components/QuestTag"
 
 interface Props {
 	quest: Quest
@@ -11,18 +12,10 @@ export default function QuestPanel(props: Props) {
 			<div className="text-xl font-bold">{props.quest.title}</div>
 			<p className="text-sm mt-2 flex-grow">{props.quest.description}</p>
 			<div className="mt-2">
-				{Array(props.quest.level)
-					.fill(null)
-					.map((_, i) => (
-						<span className="text-xl text-yellow-400" key={i}>
-							★
-						</span>
-					))}
+				<QuestLevel level={props.quest.level} />
 			</div>
 			<div className="mt-2">
-				{props.quest.tags.map((tag) => (
-					<QuestTag tag={tag} key={tag} />
-				))}
+				<QuestTag tags={props.quest.tags} />
 			</div>
 		</div>
 	)

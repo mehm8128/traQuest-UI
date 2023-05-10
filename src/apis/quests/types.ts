@@ -7,3 +7,8 @@ export interface Quest {
 	description: string
 	tags: string[]
 }
+
+export interface QuestDetail extends Quest {
+	completeUsers: string[]
+	image?: string
+}

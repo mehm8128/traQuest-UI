@@ -1,4 +1,4 @@
-import { Quest } from "@/apis/quests/types"
+import { Quest, QuestDetail } from "@/apis/quests/types"
 
 export const quests: Quest[] = [
 	{
@@ -32,3 +32,9 @@ export const quests: Quest[] = [
 		tags: ["test3"],
 	},
 ]
+
+export const questDetail: QuestDetail = {
+	...quests[0],
+	completeUsers: ["mehm8128", "itt", "yukikurage"],
+	image: "https://picsum.photos/200",
+}
