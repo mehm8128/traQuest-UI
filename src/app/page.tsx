@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function Home() {
 	return (
 		<div>
-			<h1 className="text-3xl">traQuest</h1>
+			<h1 className="text-3xl">Quests</h1>
 			<div className="px-4 py-2 flex flex-wrap gap-4">
 				{quests.map((quest) => (
 					<Link href={`/${quest.id}`} key={quest.id}>
