@@ -3,16 +3,18 @@ import { Quest, QuestDetail } from "@/apis/quests/types"
 export const quests: Quest[] = [
 	{
 		id: "1",
+		number: 1,
 		title: "メッセージを投稿してみよう",
 		level: 1,
 		completed: true,
 		completeCount: 0,
 		description:
 			"自分のtimesで何かメッセージを投稿してみよう。おすすめは「おいすー」です。",
-		tags: ["test"],
+		tags: ["test", "test2", "test3"],
 	},
 	{
 		id: "2",
+		number: 2,
 		title: "スタンプをつけてみよう",
 		level: 2,
 		completed: false,
@@ -23,6 +25,7 @@ export const quests: Quest[] = [
 	},
 	{
 		id: "3",
+		number: 3,
 		title: "チャンネルに通知をつけてみよう",
 		level: 3,
 		completed: false,
@@ -36,5 +39,5 @@ export const quests: Quest[] = [
 export const questDetail: QuestDetail = {
 	...quests[0],
 	completeUsers: ["mehm8128", "itt", "yukikurage"],
-	image: "https://picsum.photos/200",
+	image: "https://q.trap.jp/api/v3/public/icon/mehm8128",
 }

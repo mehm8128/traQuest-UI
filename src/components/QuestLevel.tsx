@@ -8,7 +8,7 @@ export default function QuestLevel(props: Props) {
 			{Array(props.level)
 				.fill(null)
 				.map((_, i) => (
-					<span className="text-xl text-yellow-400" key={i}>
+					<span className="text-2xl text-yellow-400" key={i}>
 						★
 					</span>
 				))}

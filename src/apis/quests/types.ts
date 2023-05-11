@@ -1,5 +1,6 @@
 export interface Quest {
 	id: string
+	number: number
 	title: string
 	level: number
 	completed: boolean
@@ -11,4 +12,5 @@ export interface Quest {
 export interface QuestDetail extends Quest {
 	completeUsers: string[]
 	image?: string
+	alt?: string
 }
