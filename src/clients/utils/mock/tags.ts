@@ -1,11 +1,11 @@
 import { rest } from "msw"
 
-export const rankingHandlers = () => {
+export const tagHandlers = () => {
 	const getTags = rest.get("/api/tags", (_req, res, ctx) => {
 		return res(
 			ctx.status(200),
 			ctx.json(
-				Array(100)
+				Array(20)
 					.fill({})
 					.map((_, i) => ({
 						id: `aaa${i}`,

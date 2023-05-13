@@ -1,4 +1,7 @@
 import { questHandlers } from "@/clients/utils/mock/quests"
+import { rankingHandlers } from "@/clients/utils/mock/ranking"
+import { tagHandlers } from "@/clients/utils/mock/tags"
+import { userHandlers } from "@/clients/utils/mock/users"
 import { RestHandler } from "msw"
 
 export function getHandlersArray(
@@ -8,5 +11,10 @@ export function getHandlersArray(
 }
 
 export function handlers() {
-	return [getHandlersArray(questHandlers())].flat()
+	return [
+		getHandlersArray(questHandlers()),
+		getHandlersArray(tagHandlers()),
+		getHandlersArray(rankingHandlers()),
+		getHandlersArray(userHandlers()),
+	].flat()
 }

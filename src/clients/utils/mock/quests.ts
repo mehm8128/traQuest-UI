@@ -5,7 +5,7 @@ export const questHandlers = () => {
 		return res(
 			ctx.status(200),
 			ctx.json(
-				Array(100)
+				Array(20)
 					.fill({})
 					.map((_, i) => ({
 						number: i + 1,
@@ -21,6 +21,29 @@ export const questHandlers = () => {
 			)
 		)
 	})
+
+	const getUnapprovedQuests = rest.get(
+		"/api/quests/unapproved",
+		(_req, res, ctx) => {
+			return res(
+				ctx.status(200),
+				ctx.json(
+					Array(10)
+						.fill({})
+						.map((_, i) => ({
+							number: i + 1,
+							title: `aaaaa${i + 1}`,
+							level: (i + 1) % 5,
+							completedCount: (i + 1) % 10,
+							description: "aaaaa",
+							tags: [],
+							createdAt: "2021-01-01T00:00:00",
+							updatedAt: "2021-01-01T00:00:00",
+						}))
+				)
+			)
+		}
+	)
 
 	const getQuest = rest.get("/api/quests/:id", (_req, res, ctx) => {
 		return res(
@@ -102,6 +125,7 @@ export const questHandlers = () => {
 
 	return {
 		getQuests,
+		getUnapprovedQuests,
 		getQuest,
 		postQuest,
 		putQuest,

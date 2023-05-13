@@ -7,6 +7,11 @@ export const useGetQuests = () => {
 	return res
 }
 
+export const useGetUnapprovedQuests = () => {
+	const { data: res } = useFetch<Quest[]>("/api/quests/unapproved")
+	return res
+}
+
 export const useGetQuest = (id: string) => {
 	const { data: res } = useFetch<QuestDetail[]>(`/api/quests/${id}`)
 	return res
