@@ -47,7 +47,7 @@ export default function Header() {
 								currentPath === "/admin" ? " bg-blue-300" : ""
 							}`}
 						>
-							作成申請
+							申請一覧
 						</Link>
 					)}
 				</div>

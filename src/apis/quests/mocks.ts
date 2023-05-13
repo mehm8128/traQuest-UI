@@ -1,10 +1,5 @@
 import { Quest, QuestDetail } from "@/apis/quests/types"
-
-export const tag = (id: string) => ({
-	id,
-	name: `tag${id}`,
-	createdAt: "2023-01-01T00:00:00.000Z",
-})
+import { tags, tag } from "@/apis/tags/mocks"
 
 export const quests: Quest[] = [
 	{
@@ -16,7 +11,7 @@ export const quests: Quest[] = [
 		completedCount: 0,
 		description:
 			"自分のtimesで何かメッセージを投稿してみよう。おすすめは「おいすー」です。",
-		tags: [tag("1"), tag("2"), tag("3")],
+		tags: tags(3),
 		createdAt: "2023-01-01T00:00:00.000Z",
 		updatedAt: "2023-01-01T00:00:00.000Z",
 	},

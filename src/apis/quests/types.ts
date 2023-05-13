@@ -1,8 +1,4 @@
-export interface Tag {
-	id: string
-	name: string
-	createdAt: string
-}
+import { Tag } from "@/apis/tags/types"
 
 export interface Quest {
 	id: string
@@ -19,6 +15,15 @@ export interface Quest {
 
 export interface QuestDetail extends Quest {
 	completeUsers: string[]
+	image?: string
+	alt?: string
+}
+
+export interface QuestRequest {
+	title: string
+	level: number
+	description: string
+	tags: string[]
 	image?: string
 	alt?: string
 }
