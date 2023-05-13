@@ -1,10 +1,24 @@
-import { questDetail } from "@/clients/quests/mocks"
+import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
 import UserIcon from "@/components/UserIcon"
 import Image from "next/image"
 
-export default function Quest() {
+const useQuest = async (questId: string) => {
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/${questId}`
+	)
+	if (!res.ok) throw new Error("エラーが発生しました")
+	return await res.json()
+}
+
+export default async function Quest({
+	params,
+}: {
+	params: { questId: string }
+}) {
+	const questDetail: QuestDetail = await useQuest(params.questId)
+
 	return (
 		<div className="w-1/2 mx-auto py-4">
 			<h1 className="text-3xl font-bold">{questDetail.title}</h1>

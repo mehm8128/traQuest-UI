@@ -18,6 +18,7 @@ interface Option {
 	__new__?: boolean
 }
 
+//todo: このコンポーネント自体はserver coomponentにしたい
 export default function Request() {
 	const [title, setTitle] = useState("")
 	const [description, setDescription] = useState("")

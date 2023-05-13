@@ -1,9 +1,9 @@
-import { Quest } from "@/clients/quests/types"
+import { Quest, UnapprovedQuest } from "@/clients/quests/types"
 import QuestTags from "@/components/QuestTag"
 import QuestLevel from "@/components/QuestLevel"
 
 interface Props {
-	questItem: Quest
+	questItem: Quest | UnapprovedQuest
 }
 export default function QuestItem(props: Props) {
 	return (
