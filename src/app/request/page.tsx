@@ -40,6 +40,7 @@ export default function Request() {
 	}
 
 	const handleSubmit = () => {
+		//todo: validation
 		setIsSubmitting(true)
 		const newTags: string[] = handleCreateTag(
 			selectedTags.filter((tag) => tag.__new__ !== undefined)
@@ -77,7 +78,7 @@ export default function Request() {
 						value={title}
 						onChange={(e) => setTitle(e.target.value)}
 						placeholder="クエスト名"
-						className="w-full border border-black rounded-md p-2"
+						className="w-full border border-gray-400 rounded-md p-2"
 					/>
 				</label>
 				<label className="flex flex-col gap-1">
@@ -86,7 +87,7 @@ export default function Request() {
 						value={description}
 						onChange={(e) => setDescription(e.target.value)}
 						placeholder="クエストの説明"
-						className="w-full min-h-[128px] border border-black rounded-md p-2"
+						className="w-full min-h-[128px] border border-gray-400 rounded-md p-2"
 					/>
 				</label>
 				<label className="flex flex-col gap-1">
@@ -101,7 +102,6 @@ export default function Request() {
 				</label>
 				<label className="flex flex-col gap-1">
 					<span>タグ</span>
-					{JSON.stringify(selectedTags)}
 					<CreatableSelect
 						placeholder="タグ"
 						isMulti
