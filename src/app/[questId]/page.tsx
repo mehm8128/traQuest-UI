@@ -1,4 +1,4 @@
-import { questDetail } from "@/apis/quests/mocks"
+import { questDetail } from "@/clients/quests/mocks"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
 import UserIcon from "@/components/UserIcon"

@@ -1,5 +1,5 @@
-import { Quest, QuestDetail } from "@/apis/quests/types"
-import { tags, tag } from "@/apis/tags/mocks"
+import { Quest, QuestDetail } from "@/clients/quests/types"
+import { tags, tag } from "@/clients/tags/mocks"
 
 export const quests: Quest[] = [
 	{

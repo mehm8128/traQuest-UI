@@ -1,4 +1,4 @@
-import { Tag } from "@/apis/tags/types"
+import { Tag } from "@/clients/tags/types"
 
 export interface Quest {
 	id: string

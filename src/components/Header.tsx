@@ -1,6 +1,6 @@
 "use client"
 
-import { user } from "@/apis/users.ts/mocks"
+import { user } from "@/clients/users.ts/mocks"
 import UserIcon from "@/components/UserIcon"
 import Link from "next/link"
 import { usePathname } from "next/navigation"

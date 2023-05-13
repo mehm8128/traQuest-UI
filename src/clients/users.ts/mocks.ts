@@ -1,4 +1,4 @@
-import { User } from "@/apis/users.ts/types"
+import { User } from "@/clients/users.ts/types"
 
 export const user: User = {
 	name: "mehm8128",

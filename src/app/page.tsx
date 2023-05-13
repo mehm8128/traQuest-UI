@@ -1,4 +1,4 @@
-import { quests } from "@/apis/quests/mocks"
+import { quests } from "@/clients/quests/mocks"
 import QuestPanel from "@/app/_components/QuestPanel"
 import Link from "next/link"
 

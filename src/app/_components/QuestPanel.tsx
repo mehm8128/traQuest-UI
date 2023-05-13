@@ -1,4 +1,4 @@
-import { Quest } from "@/apis/quests/types"
+import { Quest } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
 

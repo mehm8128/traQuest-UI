@@ -1,10 +1,10 @@
 "use client"
 
-import { tags } from "@/apis/tags/mocks"
+import { tags } from "@/clients/tags/mocks"
 import { useState } from "react"
 import CreatableSelect from "react-select/creatable"
 import Select from "react-select"
-import { QuestRequest } from "@/apis/quests/types"
+import { QuestRequest } from "@/clients/quests/types"
 import { useRouter } from "next/navigation"
 
 const levelOptions = Array(5)
@@ -35,7 +35,7 @@ export default function Request() {
 			alert("エラーが発生しました。")
 			return []
 		}
-		//todo: tag ids
+		//todo: return tag ids
 		return []
 	}
 
@@ -68,10 +68,7 @@ export default function Request() {
 			<p className="mt-6 mb-4">
 				クエストを新たに作成することができます。送信した申請は管理者に承認されるとクエスト一覧に表示されるようになります。
 			</p>
-			<form
-				className="flex flex-col gap-4"
-				onSubmit={(e) => e.preventDefault()}
-			>
+			<form className="flex flex-col gap-4">
 				<label className="flex flex-col gap-1">
 					<span>クエスト名</span>
 					<input
@@ -113,6 +110,7 @@ export default function Request() {
 				<div className="text-right">
 					<button
 						className="bg-blue-200 hover:bg-blue-300 px-4 py-2 rounded-xl"
+						type="button"
 						onClick={handleSubmit}
 						disabled={isSubmitting}
 					>

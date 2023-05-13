@@ -1,4 +1,4 @@
-import { quests } from "@/apis/quests/mocks"
+import { quests } from "@/clients/quests/mocks"
 import QuestItem from "@/app/admin/_components/QuestItem"
 
 export default function Request() {

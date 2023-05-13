@@ -1,4 +1,4 @@
-import { ranking } from "@/apis/rankings/mocks"
+import { ranking } from "@/clients/ranking/mocks"
 import RankingItem from "@/app/ranking/_components/RankingItem"
 
 export default function Ranking() {
