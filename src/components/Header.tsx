@@ -1,11 +1,13 @@
 "use client"
 
+import { user } from "@/apis/users.ts/mocks"
 import UserIcon from "@/components/UserIcon"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 export default function Header() {
 	const currentPath = usePathname()
+	const me = user
 
 	return (
 		<header className="flex items-center justify-between bg-blue-200 py-2 px-4">
@@ -38,6 +40,16 @@ export default function Header() {
 					>
 						作成申請
 					</Link>
+					{me.name === "mehm8128" && (
+						<Link
+							href="/admin"
+							className={`hover:bg-blue-300 py-2 px-3 rounded-3xl${
+								currentPath === "/admin" ? " bg-blue-300" : ""
+							}`}
+						>
+							作成申請
+						</Link>
+					)}
 				</div>
 			</div>
 			<div className="flex items-center gap-2">
