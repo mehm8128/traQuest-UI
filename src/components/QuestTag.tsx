@@ -1,5 +1,7 @@
+import { Tag } from "@/apis/quests/types"
+
 interface Props {
-	tags: string[]
+	tags: Tag[]
 }
 
 export default function QuestTags(props: Props) {
@@ -8,9 +10,9 @@ export default function QuestTags(props: Props) {
 			{props.tags.map((tag) => (
 				<span
 					className="bg-gray-200 border border-gray-300 rounded-md py-1 px-2"
-					key={tag}
+					key={tag.id}
 				>
-					{tag}
+					{tag.name}
 				</span>
 			))}
 		</div>

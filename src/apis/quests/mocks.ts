@@ -1,5 +1,11 @@
 import { Quest, QuestDetail } from "@/apis/quests/types"
 
+export const tag = (id: string) => ({
+	id,
+	name: `tag${id}`,
+	createdAt: "2023-01-01T00:00:00.000Z",
+})
+
 export const quests: Quest[] = [
 	{
 		id: "1",
@@ -7,10 +13,12 @@ export const quests: Quest[] = [
 		title: "メッセージを投稿してみよう",
 		level: 1,
 		completed: true,
-		completeCount: 0,
+		completedCount: 0,
 		description:
 			"自分のtimesで何かメッセージを投稿してみよう。おすすめは「おいすー」です。",
-		tags: ["test", "test2", "test3"],
+		tags: [tag("1"), tag("2"), tag("3")],
+		createdAt: "2023-01-01T00:00:00.000Z",
+		updatedAt: "2023-01-01T00:00:00.000Z",
 	},
 	{
 		id: "2",
@@ -18,10 +26,12 @@ export const quests: Quest[] = [
 		title: "スタンプをつけてみよう",
 		level: 2,
 		completed: false,
-		completeCount: 0,
+		completedCount: 0,
 		description:
 			"他の人の投稿にスタンプをつけてみよう。generalチャンネルには重要な投稿があるので、みんなが押しているスタンプを押してみよう。",
-		tags: ["test2"],
+		tags: [tag("2")],
+		createdAt: "2023-01-01T00:00:00.000Z",
+		updatedAt: "2023-01-01T00:00:00.000Z",
 	},
 	{
 		id: "3",
@@ -29,10 +39,12 @@ export const quests: Quest[] = [
 		title: "チャンネルに通知をつけてみよう",
 		level: 3,
 		completed: false,
-		completeCount: 0,
+		completedCount: 0,
 		description:
 			"チャンネルには右上の通知ボタンから通知をつけることができます。気になった先輩のtimesに通知をつけてみよう。",
-		tags: ["test3"],
+		tags: [tag("3")],
+		createdAt: "2023-01-01T00:00:00.000Z",
+		updatedAt: "2023-01-01T00:00:00.000Z",
 	},
 ]
 

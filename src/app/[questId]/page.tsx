@@ -7,7 +7,7 @@ import Image from "next/image"
 export default function Quest() {
 	return (
 		<div className="w-1/2 mx-auto py-4">
-			<h1 className="text-2xl font-bold">{questDetail.title}</h1>
+			<h1 className="text-3xl font-bold">{questDetail.title}</h1>
 			<div className="flex justify-between mt-2">
 				<p>{questDetail.description}</p>
 				<div className="flex flex-col items-end gap-2">
