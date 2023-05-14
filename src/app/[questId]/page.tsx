@@ -1,3 +1,4 @@
+import { completeQuest } from "@/clients/quests/apis"
 import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
@@ -6,7 +7,8 @@ import Image from "next/image"
 
 const useQuest = async (questId: string) => {
 	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/${questId}`
+		`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/${questId}`,
+		{ next: { revalidate: 60 } }
 	)
 	if (!res.ok) throw new Error("エラーが発生しました")
 	return await res.json()
@@ -18,6 +20,15 @@ export default async function Quest({
 	params: { questId: string }
 }) {
 	const questDetail: QuestDetail = await useQuest(params.questId)
+
+	const handleComplete = async () => {
+		try {
+			await completeQuest(params.questId)
+			alert("クエストを完了しました！")
+		} catch {
+			alert("クエストの完了に失敗しました")
+		}
+	}
 
 	return (
 		<div className="w-1/2 mx-auto py-4">
@@ -37,10 +48,22 @@ export default async function Quest({
 					width={320}
 				/>
 			)}
-			<section className="mt-16">
+			<div className="text-center mt-12">
+				<button
+					className="bg-blue-200 hover:bg-blue-300 px-4 py-2 rounded-xl"
+					onClick={handleComplete}
+					disabled={questDetail.completed}
+				>
+					{questDetail.completed ? "クエスト完了！" : "クエスト完了済み"}
+				</button>
+			</div>
+			<section className="mt-8">
 				<h2 className="text-xl">クリア済みユーザー</h2>
+				{questDetail.completedUsers.length === 0 && (
+					<div className="mt-4">まだいません！一番乗りを目指しましょう</div>
+				)}
 				<div className="flex flex-wrap gap-12 mt-4">
-					{questDetail.completeUsers.map((user) => (
+					{questDetail.completedUsers.map((user) => (
 						<div key={user} className="flex flex-col items-center gap-1">
 							<UserIcon user={user} size={64} />
 							<span>{user}</span>

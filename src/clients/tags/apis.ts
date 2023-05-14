@@ -1,4 +1,4 @@
-import { Tag, TagRequest } from "./types"
+import { Tag } from "./types"
 import { useFetch } from "@/clients/utils/fetcher"
 import axios from "axios"
 
@@ -7,7 +7,10 @@ export const useGetTags = () => {
 	return res
 }
 
-export const postTag = async (tag: TagRequest) => {
-	const res = await axios.post("/api/tags", tag)
+export const postTag = async (tags: string[]) => {
+	const res = await axios.post(
+		`${process.env.NEXT_PUBLIC_ORIGIN}/api/tags`,
+		tags
+	)
 	return res
 }

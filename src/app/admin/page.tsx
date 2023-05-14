@@ -2,7 +2,10 @@ import QuestItem from "@/app/admin/_components/QuestItem"
 import { UnapprovedQuest } from "@/clients/quests/types"
 
 const useUnapprovedQuests = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/unapproved`)
+	const res = await fetch(
+		`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/unapproved`,
+		{ next: { revalidate: 60 } }
+	)
 	if (!res.ok) throw new Error("エラーが発生しました")
 	return await res.json()
 }

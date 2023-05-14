@@ -6,6 +6,8 @@ import CreatableSelect from "react-select/creatable"
 import Select from "react-select"
 import { QuestRequest } from "@/clients/quests/types"
 import { useRouter } from "next/navigation"
+import { postQuest } from "@/clients/quests/apis"
+import { postTag } from "@/clients/tags/apis"
 
 const levelOptions = Array(5)
 	.fill(0)
@@ -28,10 +30,11 @@ export default function Request() {
 
 	const router = useRouter()
 
-	const handleCreateTag = (tags: Option[]) => {
+	const handleCreateTag = async (tags: Option[]) => {
+		if (tags.length === 0) return []
 		try {
 			const requestData: string[] = tags.map((tag) => tag.value)
-			// todo: 送信処理
+			await postTag(requestData)
 		} catch {
 			alert("エラーが発生しました。")
 			return []
@@ -40,10 +43,10 @@ export default function Request() {
 		return []
 	}
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		//todo: validation
 		setIsSubmitting(true)
-		const newTags: string[] = handleCreateTag(
+		const newTags: string[] = await handleCreateTag(
 			selectedTags.filter((tag) => tag.__new__ !== undefined)
 		)
 
@@ -54,7 +57,7 @@ export default function Request() {
 				level: selectedLevel.value,
 				tags: selectedTags.map((tag) => tag.value).concat(newTags),
 			}
-			// todo: 送信処理
+			await postQuest(requestData)
 			alert("申請を送信しました。")
 			router.push("/")
 		} catch {
@@ -104,7 +107,7 @@ export default function Request() {
 						placeholder="タグ"
 						isMulti
 						name="tags"
-						options={tagOptions}
+						options={[]}
 						onChange={(val) => (val ? setSelectedTags([...val]) : null)}
 					/>
 				</label>

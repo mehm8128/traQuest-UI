@@ -2,12 +2,14 @@ import { RankingItem as RankingItemType } from "@/clients/ranking/types"
 import RankingItem from "@/app/ranking/_components/RankingItem"
 
 const useRanking = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/ranking`)
+	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/ranking`, {
+		next: { revalidate: 60 },
+	})
 	if (!res.ok) throw new Error("エラーが発生しました")
 	return await res.json()
 }
 export default async function Ranking() {
-	const ranking: RankingItemType[] = (await useRanking()) ?? []
+	const ranking: RankingItemType[] = await useRanking()
 
 	return (
 		<div className="w-1/3 mx-auto py-4">

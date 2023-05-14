@@ -3,13 +3,15 @@ import { Quest } from "@/clients/quests/types"
 import Link from "next/link"
 
 const useQuests = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests`)
+	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests`, {
+		next: { revalidate: 60 },
+	})
 	if (!res.ok) throw new Error("エラーが発生しました")
 	return await res.json()
 }
 
 export default async function Home() {
-	const quests: Quest[] = (await useQuests()) ?? []
+	const quests: Quest[] = await useQuests()
 
 	return (
 		<div>

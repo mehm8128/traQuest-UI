@@ -17,7 +17,7 @@ export interface Quest extends UnapprovedQuest {
 }
 
 export interface QuestDetail extends Quest {
-	completeUsers: string[]
+	completedUsers: string[]
 	image?: string
 	alt?: string
 }

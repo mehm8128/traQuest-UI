@@ -45,6 +45,6 @@ export const quests: Quest[] = [
 
 export const questDetail: QuestDetail = {
 	...quests[0],
-	completeUsers: ["mehm8128", "itt", "yukikurage"],
+	completedUsers: ["mehm8128", "itt", "yukikurage"],
 	image: "https://q.trap.jp/api/v3/public/icon/mehm8128",
 }
