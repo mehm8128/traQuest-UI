@@ -1,4 +1,4 @@
-import { completeQuest } from "@/clients/quests/apis"
+import ApproveButton from "@/app/[questId]/_components/ApproveButton"
 import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
@@ -21,15 +21,6 @@ export default async function Quest({
 }) {
 	const questDetail: QuestDetail = await useQuest(params.questId)
 
-	const handleComplete = async () => {
-		try {
-			await completeQuest(params.questId)
-			alert("クエストを完了しました！")
-		} catch {
-			alert("クエストの完了に失敗しました")
-		}
-	}
-
 	return (
 		<div className="w-1/2 mx-auto py-4">
 			<h1 className="text-3xl font-bold">{questDetail.title}</h1>
@@ -48,15 +39,11 @@ export default async function Quest({
 					width={320}
 				/>
 			)}
-			{/**todo: client componentにする */}
 			<div className="text-center mt-12">
-				<button
-					className="bg-blue-200 hover:bg-blue-300 px-4 py-2 rounded-xl"
-					onClick={handleComplete}
-					disabled={questDetail.completed}
-				>
-					{questDetail.completed ? "クエスト完了！" : "クエスト完了済み"}
-				</button>
+				<ApproveButton
+					isCompleted={questDetail.completed}
+					questId={params.questId}
+				/>
 			</div>
 			<section className="mt-8">
 				<h2 className="text-xl">クリア済みユーザー</h2>
