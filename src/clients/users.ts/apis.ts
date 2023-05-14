@@ -1,7 +1,7 @@
 import { User } from "@/clients/users.ts/types"
-import { useFetch } from "@/clients/utils/fetcher"
+import axios from "axios"
 
 export const useGetMe = () => {
-	const { data: res } = useFetch<User[]>("/api/users/me")
+	const res = axios.get<User[]>("/api/users/me")
 	return res
 }

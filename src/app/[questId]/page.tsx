@@ -48,6 +48,7 @@ export default async function Quest({
 					width={320}
 				/>
 			)}
+			{/**todo: client componentにする */}
 			<div className="text-center mt-12">
 				<button
 					className="bg-blue-200 hover:bg-blue-300 px-4 py-2 rounded-xl"
