@@ -3,6 +3,7 @@
 import axios from "axios"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { getApiOrigin } from "@/utils/env"
 
 export default function Callback({
 	searchParams,
@@ -13,7 +14,7 @@ export default function Callback({
 	useEffect(() => {
 		;(async () => {
 			await axios.get(
-				`${process.env.NEXT_PUBLIC_ORIGIN}/api/users/callback?code=${searchParams.code}`,
+				`${getApiOrigin()}/api/users/callback?code=${searchParams.code}`,
 				{ withCredentials: true }
 			)
 			router.push("/")

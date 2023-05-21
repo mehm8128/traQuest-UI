@@ -1,8 +1,9 @@
 import QuestRequestForm from "@/app/request/_components/QuestRequestForm"
 import { Tag } from "@/clients/tags/types"
+import { getApiOrigin } from "@/utils/env"
 
 const useTags = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/tags`, {
+	const res = await fetch(`${getApiOrigin()}/api/tags`, {
 		next: { revalidate: 60 },
 	})
 	if (!res.ok) throw new Error("エラーが発生しました")

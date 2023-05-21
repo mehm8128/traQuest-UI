@@ -2,14 +2,15 @@
 
 import QuestItem from "@/app/admin/_components/QuestItem"
 import { UnapprovedQuest } from "@/clients/quests/types"
+import { getApiOrigin } from "@/utils/env"
 import axios from "axios"
 import { useState, useEffect } from "react"
 
 const useUnapprovedQuests = async () => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/unapproved`,
-		{ next: { revalidate: 60 }, headers: { credentials: "include" } }
-	)
+	const res = await fetch(`${getApiOrigin()}/api/quests/unapproved`, {
+		next: { revalidate: 60 },
+		headers: { credentials: "include" },
+	})
 	if (!res.ok) throw new Error("エラーが発生しました")
 	return await res.json()
 }
@@ -20,7 +21,7 @@ export default async function Request() {
 	useEffect(() => {
 		;(async () => {
 			const res = await axios.get<UnapprovedQuest[]>(
-				`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/unapproved`,
+				`${getApiOrigin()}/api/quests/unapproved`,
 				{ withCredentials: true }
 			)
 			setQuests(res.data)

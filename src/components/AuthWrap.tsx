@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { meState } from "@/stores/user"
 import { useRecoilState } from "recoil"
 import { getMe } from "@/clients/users/apis"
+import { getApiOrigin } from "@/utils/env"
 
 export default function AuthWrap({ children }: { children: React.ReactNode }) {
 	const [me, setMe] = useRecoilState(meState)
@@ -15,7 +16,7 @@ export default function AuthWrap({ children }: { children: React.ReactNode }) {
 				const me = await getMe()
 				setMe(me)
 			} catch {
-				location.href = `${process.env.NEXT_PUBLIC_ORIGIN}/api/users/authorize`
+				location.href = `${getApiOrigin()}/api/users/authorize`
 			}
 		})()
 	}, [me, setMe])

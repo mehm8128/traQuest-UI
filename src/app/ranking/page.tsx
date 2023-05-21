@@ -1,8 +1,9 @@
 import { RankingItem as RankingItemType } from "@/clients/ranking/types"
 import RankingItem from "@/app/ranking/_components/RankingItem"
+import { getApiOrigin } from "@/utils/env"
 
 const useRanking = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/ranking`, {
+	const res = await fetch(`${getApiOrigin()}/api/ranking`, {
 		next: { revalidate: 60 },
 	})
 	if (!res.ok) throw new Error("エラーが発生しました")

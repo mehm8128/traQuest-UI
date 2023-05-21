@@ -2,12 +2,13 @@
 
 import QuestPanel from "@/app/_components/QuestPanel"
 import { Quest } from "@/clients/quests/types"
+import { getApiOrigin } from "@/utils/env"
 import axios from "axios"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 
 const useQuests = async () => {
-	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests`, {
+	const res = await fetch(`${getApiOrigin()}/api/quests`, {
 		next: { revalidate: 60 },
 	})
 	if (!res.ok) throw new Error("エラーが発生しました")
@@ -19,10 +20,9 @@ export default async function Home() {
 
 	useEffect(() => {
 		;(async () => {
-			const res = await axios.get<Quest[]>(
-				`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests`,
-				{ withCredentials: true }
-			)
+			const res = await axios.get<Quest[]>(`${getApiOrigin()}/api/quests`, {
+				withCredentials: true,
+			})
 			setQuests(res.data)
 		})()
 	}, [])

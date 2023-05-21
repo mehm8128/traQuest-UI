@@ -5,15 +5,15 @@ import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
 import UserIcon from "@/components/UserIcon"
+import { getApiOrigin } from "@/utils/env"
 import axios from "axios"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
 const useQuest = async (questId: string) => {
-	const res = await fetch(
-		`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/${questId}`,
-		{ next: { revalidate: 60 } }
-	)
+	const res = await fetch(`${getApiOrigin()}/api/quests/${questId}`, {
+		next: { revalidate: 60 },
+	})
 	if (!res.ok) throw new Error("エラーが発生しました")
 	return await res.json()
 }
@@ -28,7 +28,7 @@ export default async function Quest({
 	useEffect(() => {
 		;(async () => {
 			const res = await axios.get<QuestDetail>(
-				`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/${params.questId}`,
+				`${getApiOrigin()}/api/quests/${params.questId}`,
 				{ withCredentials: true }
 			)
 			setQuestDetail(res.data)
