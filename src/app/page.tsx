@@ -15,7 +15,6 @@ export default async function Home() {
 
 	return (
 		<div>
-			<a href="http://localhost:8000/api/users/signin">login</a>
 			<h1 className="text-3xl mt-2 text-center">クエスト一覧</h1>
 			<div className="px-4 mt-6 flex flex-wrap gap-4">
 				{quests.map((quest) => (
