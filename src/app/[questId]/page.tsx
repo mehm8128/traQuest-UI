@@ -1,9 +1,13 @@
-import ApproveButton from "@/app/[questId]/_components/ApproveButton"
+"use client"
+
+import CompleteButton from "@/app/[questId]/_components/CompleteButton"
 import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
 import UserIcon from "@/components/UserIcon"
+import axios from "axios"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 const useQuest = async (questId: string) => {
 	const res = await fetch(
@@ -19,7 +23,19 @@ export default async function Quest({
 }: {
 	params: { questId: string }
 }) {
-	const questDetail: QuestDetail = await useQuest(params.questId)
+	const [questDetail, setQuestDetail] = useState<QuestDetail>()
+
+	useEffect(() => {
+		;(async () => {
+			const res = await axios.get<QuestDetail>(
+				`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests/${params.questId}`,
+				{ withCredentials: true }
+			)
+			setQuestDetail(res.data)
+		})()
+	}, [params.questId])
+
+	if (!questDetail) return <div>loading</div>
 
 	return (
 		<div className="w-1/2 mx-auto py-4">
@@ -40,9 +56,10 @@ export default async function Quest({
 				/>
 			)}
 			<div className="text-center mt-12">
-				<ApproveButton
+				<CompleteButton
 					isCompleted={questDetail.completed}
 					questId={params.questId}
+					setQuestDetail={setQuestDetail}
 				/>
 			</div>
 			<section className="mt-8">

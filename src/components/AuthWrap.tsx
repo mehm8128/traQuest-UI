@@ -2,13 +2,14 @@
 
 import { useEffect } from "react"
 import { meState } from "@/stores/user"
-import { useSetRecoilState } from "recoil"
+import { useRecoilState } from "recoil"
 import { getMe } from "@/clients/users/apis"
 
 export default function AuthWrap({ children }: { children: React.ReactNode }) {
-	const setMe = useSetRecoilState(meState)
+	const [me, setMe] = useRecoilState(meState)
 
 	useEffect(() => {
+		if (me) return
 		;(async () => {
 			try {
 				const me = await getMe()
@@ -17,7 +18,7 @@ export default function AuthWrap({ children }: { children: React.ReactNode }) {
 				location.href = `${process.env.NEXT_PUBLIC_ORIGIN}/api/users/authorize`
 			}
 		})()
-	}, [setMe])
+	}, [me, setMe])
 
 	return <>{children}</>
 }

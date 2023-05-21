@@ -1,6 +1,10 @@
+"use client"
+
 import QuestPanel from "@/app/_components/QuestPanel"
 import { Quest } from "@/clients/quests/types"
+import axios from "axios"
 import Link from "next/link"
+import { useState, useEffect } from "react"
 
 const useQuests = async () => {
 	const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests`, {
@@ -11,7 +15,19 @@ const useQuests = async () => {
 }
 
 export default async function Home() {
-	const quests: Quest[] = await useQuests()
+	const [quests, setQuests] = useState<Quest[]>([])
+
+	useEffect(() => {
+		;(async () => {
+			const res = await axios.get<Quest[]>(
+				`${process.env.NEXT_PUBLIC_ORIGIN}/api/quests`,
+				{ withCredentials: true }
+			)
+			setQuests(res.data)
+		})()
+	}, [])
+
+	if (!quests) return <div>loading</div>
 
 	return (
 		<div>
