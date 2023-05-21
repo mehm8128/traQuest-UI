@@ -1,4 +1,4 @@
-import { User } from "@/clients/users.ts/types"
+import { User } from "@/clients/users/types"
 import { atom } from "recoil"
 
 export const meState = atom<User>({

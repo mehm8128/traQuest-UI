@@ -1,10 +1,9 @@
 "use client"
 
-import { User } from "@/clients/users.ts/types"
-import axios from "axios"
 import { useEffect } from "react"
 import { meState } from "@/stores/user"
 import { useSetRecoilState } from "recoil"
+import { getMe } from "@/clients/users/apis"
 
 export default function AuthWrap({ children }: { children: React.ReactNode }) {
 	const setMe = useSetRecoilState(meState)
@@ -12,11 +11,8 @@ export default function AuthWrap({ children }: { children: React.ReactNode }) {
 	useEffect(() => {
 		;(async () => {
 			try {
-				const res = await axios.get<User>(
-					`${process.env.NEXT_PUBLIC_ORIGIN}/api/users/me`,
-					{ withCredentials: true }
-				)
-				setMe(res.data)
+				const me = await getMe()
+				setMe(me)
 			} catch {
 				location.href = `${process.env.NEXT_PUBLIC_ORIGIN}/api/users/authorize`
 			}
