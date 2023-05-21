@@ -1,4 +1,4 @@
-import { Tag } from "@/clients/quests/types"
+import { Tag } from "@/clients/tags/types"
 
 interface Props {
 	tags: Tag[]
