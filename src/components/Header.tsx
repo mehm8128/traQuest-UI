@@ -1,13 +1,14 @@
 "use client"
 
-import { user } from "@/clients/users.ts/mocks"
 import UserIcon from "@/components/UserIcon"
+import { meState } from "@/stores/user"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useRecoilValue } from "recoil"
 
 export default function Header() {
 	const currentPath = usePathname()
-	const me = user
+	const me = useRecoilValue(meState)
 
 	return (
 		<header className="flex items-center justify-between bg-blue-200 py-2 px-4">
@@ -53,8 +54,8 @@ export default function Header() {
 				</div>
 			</div>
 			<div className="flex items-center gap-2">
-				<div>mehm8128</div>
-				<UserIcon user="mehm8128" size={40} />
+				<div>{me.name}</div>
+				<UserIcon user={me.name} size={40} />
 			</div>
 		</header>
 	)
