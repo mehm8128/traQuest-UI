@@ -10,7 +10,7 @@ export default function AuthWrap({ children }: { children: React.ReactNode }) {
 	const [me, setMe] = useRecoilState(meState)
 
 	useEffect(() => {
-		if (me) return
+		if (me.id) return
 		;(async () => {
 			try {
 				const me = await getMe()
