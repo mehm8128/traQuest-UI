@@ -3,6 +3,7 @@ import "./globals.css"
 import { Inter } from "next/font/google"
 import AuthWrap from "@/components/AuthWrap"
 import RecoilProvider from "@/components/RecoilProvider"
+import axios from "axios"
 
 const inter = Inter({ subsets: ["latin"] })
 

@@ -27,7 +27,8 @@
 		"typescript": "5.0.4"
 	},
 	"devDependencies": {
-		"msw": "^1.2.1"
+		"msw": "^1.2.1",
+		"prettier": "^3.0.0"
 	},
 	"msw": {
 		"workerDirectory": "public"
