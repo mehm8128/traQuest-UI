@@ -1,5 +1,5 @@
 export interface RankingItem {
 	rank: number
-	userName: string
+	id: string
 	score: number
 }
