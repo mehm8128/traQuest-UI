@@ -25,7 +25,7 @@ export default function CompleteButton({
 				return {
 					...questDetail,
 					completed: true,
-					completedUsers: [...questDetail.completedUsers, me.name],
+					completedUsers: [...questDetail.completedUsers, me.id],
 				}
 			})
 		} catch {

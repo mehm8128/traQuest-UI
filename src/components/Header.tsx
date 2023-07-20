@@ -41,7 +41,7 @@ export default function Header() {
 					>
 						作成申請
 					</Link>
-					{me.name === "mehm8128" && (
+					{me.id === "mehm8128" && (
 						<Link
 							href="/admin"
 							className={`hover:bg-blue-300 py-2 px-3 rounded-3xl${
@@ -54,8 +54,8 @@ export default function Header() {
 				</div>
 			</div>
 			<div className="flex items-center gap-2">
-				<div>{me.name}</div>
-				<UserIcon user={me.name} size={40} />
+				<div>{me.id}</div>
+				<UserIcon user={me.id} size={40} />
 			</div>
 		</header>
 	)

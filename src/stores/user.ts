@@ -5,7 +5,6 @@ export const meState = atom<User>({
 	key: "meState",
 	default: {
 		id: "",
-		name: "",
 		completedQuests: [],
 		score: 0,
 	},
