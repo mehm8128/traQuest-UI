@@ -13,7 +13,7 @@ export default function AuthWrap({ children }: { children: React.ReactNode }) {
 		if (me.id) return
 		;(async () => {
 			const meId = await getMeId()
-			axios.defaults.headers.common["X-Forwarded-User"] = meId.id
+			axios.defaults.headers.common["X-Traq-User"] = meId.id
 
 			try {
 				const me = await getMe()
