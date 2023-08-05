@@ -13,12 +13,11 @@ export const putQuest = async (quest: QuestRequest) => {
 }
 
 export const completeQuest = async (id: string, userId: string) => {
-	const res = await axios.post(
+	await axios.post(
 		`${getApiOrigin()}/api/quests/${id}/complete`,
 		{ userId },
 		{ withCredentials: true }
 	)
-	return res.data
 }
 
 export const rejectQuest = async (id: string, userId: string) => {
