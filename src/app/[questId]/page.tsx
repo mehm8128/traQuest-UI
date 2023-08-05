@@ -3,7 +3,7 @@
 import CompleteButton from "@/app/[questId]/_components/CompleteButton"
 import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
-import QuestTag from "@/components/QuestTag"
+import QuestTags from "@/components/QuestTags"
 import UserIcon from "@/components/UserIcon"
 import { meState } from "@/stores/user"
 import { getApiOrigin } from "@/utils/env"
@@ -48,7 +48,7 @@ export default async function Quest({
 				<p>{questDetail.description}</p>
 				<div className="flex flex-col items-end gap-2">
 					<QuestLevel level={questDetail.level} />
-					<QuestTag tags={questDetail.tags} />
+					<QuestTags tags={questDetail.tags.map((tag) => tag.name)} />
 				</div>
 			</div>
 			{questDetail.image && (

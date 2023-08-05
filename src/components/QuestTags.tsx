@@ -1,7 +1,7 @@
 import { Tag } from "@/clients/tags/types"
 
 interface Props {
-	tags: Tag[]
+	tags: string[]
 }
 
 export default function QuestTags(props: Props) {
@@ -10,9 +10,9 @@ export default function QuestTags(props: Props) {
 			{props.tags.map((tag) => (
 				<span
 					className="bg-gray-200 border border-gray-300 rounded-md py-1 px-2"
-					key={tag.id}
+					key={tag}
 				>
-					{tag.name}
+					{tag}
 				</span>
 			))}
 		</div>

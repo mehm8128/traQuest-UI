@@ -1,7 +1,7 @@
 "use client"
 
 import { UnapprovedQuest } from "@/clients/quests/types"
-import QuestTags from "@/components/QuestTag"
+import QuestTags from "@/components/QuestTags"
 import QuestLevel from "@/components/QuestLevel"
 import { approveQuest, rejectQuest } from "@/clients/quests/apis"
 import { meState } from "@/stores/user"
@@ -43,7 +43,7 @@ export default function QuestItem(props: Props) {
 			<div className="font-bold">{props.questItem.title}</div>
 			<p>{props.questItem.description}</p>
 			<QuestLevel level={props.questItem.level} />
-			<QuestTags tags={props.questItem.tags} />
+			<QuestTags tags={props.questItem.tags.map((tag) => tag.name)} />
 			<div className="text-right space-x-4">
 				<button
 					className="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-xl"
