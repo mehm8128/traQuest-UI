@@ -2,9 +2,11 @@
 
 import QuestItem from "@/app/admin/_components/QuestItem"
 import { UnapprovedQuest } from "@/clients/quests/types"
+import { meState } from "@/stores/user"
 import { getApiOrigin } from "@/utils/env"
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { useRecoilValue } from "recoil"
 
 const useUnapprovedQuests = async () => {
 	const res = await fetch(`${getApiOrigin()}/api/quests/unapproved`, {
@@ -15,10 +17,12 @@ const useUnapprovedQuests = async () => {
 	return await res.json()
 }
 
-export default async function Request() {
+export default async function Admin() {
+	const me = useRecoilValue(meState)
 	const [quests, setQuests] = useState<UnapprovedQuest[]>([])
 
 	useEffect(() => {
+		if (!me.id) return
 		;(async () => {
 			const res = await axios.get<UnapprovedQuest[]>(
 				`${getApiOrigin()}/api/quests/unapproved`,
@@ -26,7 +30,7 @@ export default async function Request() {
 			)
 			setQuests(res.data)
 		})()
-	}, [])
+	}, [me])
 
 	if (!quests) return <div>loading</div>
 

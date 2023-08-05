@@ -5,10 +5,12 @@ import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTag from "@/components/QuestTag"
 import UserIcon from "@/components/UserIcon"
+import { meState } from "@/stores/user"
 import { getApiOrigin } from "@/utils/env"
 import axios from "axios"
 import Image from "next/image"
 import { useEffect, useState } from "react"
+import { useRecoilValue } from "recoil"
 
 const useQuest = async (questId: string) => {
 	const res = await fetch(`${getApiOrigin()}/api/quests/${questId}`, {
@@ -23,9 +25,11 @@ export default async function Quest({
 }: {
 	params: { questId: string }
 }) {
+	const me = useRecoilValue(meState)
 	const [questDetail, setQuestDetail] = useState<QuestDetail>()
 
 	useEffect(() => {
+		if (!me.id) return
 		;(async () => {
 			const res = await axios.get<QuestDetail>(
 				`${getApiOrigin()}/api/quests/${params.questId}`,
@@ -33,7 +37,7 @@ export default async function Quest({
 			)
 			setQuestDetail(res.data)
 		})()
-	}, [params.questId])
+	}, [params.questId, me])
 
 	if (!questDetail) return <div>loading</div>
 
