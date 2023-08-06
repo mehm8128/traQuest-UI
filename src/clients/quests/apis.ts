@@ -21,19 +21,17 @@ export const completeQuest = async (id: string, userId: string) => {
 }
 
 export const rejectQuest = async (id: string, userId: string) => {
-	const res = await axios.post<Quest>(
+	await axios.post<Quest>(
 		`${getApiOrigin()}/api/quests/${id}/reject`,
 		{ userId },
 		{ withCredentials: true }
 	)
-	return res.data
 }
 
 export const approveQuest = async (id: string, userId: string) => {
-	const res = await axios.post<Quest>(
+	await axios.post<Quest>(
 		`${getApiOrigin()}/api/quests/${id}/approve`,
 		{ userId },
 		{ withCredentials: true }
 	)
-	return res.data
 }
