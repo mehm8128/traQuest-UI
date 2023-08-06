@@ -12,7 +12,7 @@ test("adminであるとき、申請一覧リンクが表示される", () => {
 			<Header />
 		</RecoilProvider>
 	)
-	expect(screen.getByText("申請一覧")).toBeInTheDocument()
+	expect(screen.getByRole("link", { name: "申請一覧" })).toBeInTheDocument()
 })
 
 test("adminでないとき、申請一覧リンクが表示されない", () => {
@@ -25,5 +25,7 @@ test("adminでないとき、申請一覧リンクが表示されない", () => 
 			<Header />
 		</RecoilProvider>
 	)
-	expect(screen.queryByText("申請一覧")).not.toBeInTheDocument()
+	expect(
+		screen.queryByRole("link", { name: "申請一覧" })
+	).not.toBeInTheDocument()
 })

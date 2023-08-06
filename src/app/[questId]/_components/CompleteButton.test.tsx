@@ -19,8 +19,9 @@ test("uncompletedなときにcompleteできる", async () => {
 			/>
 		</RecoilProvider>
 	)
-	expect(screen.getByText("クエスト完了！")).toBeInTheDocument()
-	await user.click(screen.getByRole("button"))
+	const buttonEle = screen.getByRole("button", { name: "クエスト完了！" })
+	expect(buttonEle).toBeInTheDocument()
+	await user.click(buttonEle)
 	expect(mockFetchFn).toHaveBeenCalled()
 	expect(mockSetFn).toHaveBeenCalled()
 })
@@ -36,6 +37,7 @@ test("completedなときにボタンがdisabled", async () => {
 			/>
 		</RecoilProvider>
 	)
-	expect(screen.getByText("クエスト完了済み")).toBeInTheDocument()
-	expect(screen.getByRole("button")).toBeDisabled()
+	const buttonEle = screen.getByRole("button", { name: "クエスト完了済み" })
+	expect(buttonEle).toBeInTheDocument()
+	expect(buttonEle).toBeDisabled()
 })
