@@ -1,10 +1,10 @@
 "use client"
 
 import CompleteButton from "@/app/[questId]/_components/CompleteButton"
+import CompletedUsers from "@/app/[questId]/_components/CompletedUsers"
 import { QuestDetail } from "@/clients/quests/types"
 import QuestLevel from "@/components/QuestLevel"
 import QuestTags from "@/components/QuestTags"
-import UserIcon from "@/components/UserIcon"
 import { meState } from "@/stores/user"
 import { getApiOrigin } from "@/utils/env"
 import axios from "axios"
@@ -66,20 +66,7 @@ export default async function Quest({
 					setQuestDetail={setQuestDetail}
 				/>
 			</div>
-			<section className="mt-8">
-				<h2 className="text-xl">クリア済みユーザー</h2>
-				{questDetail.completedUsers.length === 0 && (
-					<div className="mt-4">まだいません！一番乗りを目指しましょう</div>
-				)}
-				<div className="flex flex-wrap gap-12 mt-4">
-					{questDetail.completedUsers.map((user) => (
-						<div key={user} className="flex flex-col items-center gap-1">
-							<UserIcon user={user} size={64} />
-							<span>{user}</span>
-						</div>
-					))}
-				</div>
-			</section>
+			<CompletedUsers questDetail={questDetail} />
 		</div>
 	)
 }
