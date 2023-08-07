@@ -1,38 +1,46 @@
 "use client"
 
-import { useState } from "react"
+import { useId, useState } from "react"
 import CreatableSelect from "react-select/creatable"
 import Select from "react-select"
-import { QuestRequest } from "@/clients/quests/types"
 import { useRouter } from "next/navigation"
 import { postQuest } from "@/clients/quests/apis"
 import { postTag } from "@/clients/tags/apis"
 import { Tag } from "@/clients/tags/types"
+import FieldWrap from "@/components/FieldWrap"
+import { QuestRequestSchema, OptionSchema } from "@/clients/quests/schema"
+import { Controller, useForm } from "react-hook-form"
+import { valibotResolver } from "@hookform/resolvers/valibot"
+import { questSchema } from "@/clients/quests/schema"
+import { QuestRequest } from "@/clients/quests/types"
 
 const levelOptions = Array(5)
 	.fill(0)
-	.map((_, i) => ({ value: i + 1, label: i + 1 }))
-
-interface Option {
-	value: string
-	label: string
-	__isNew__?: boolean
-}
+	.map((_, i) => ({ value: (i + 1).toString(), label: (i + 1).toString() }))
 
 export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
-	const [title, setTitle] = useState("")
-	const [description, setDescription] = useState("")
-	const [selectedLevel, setSelectedLevel] = useState(levelOptions[0])
-	const [selectedTags, setSelectedTags] = useState<Option[]>([])
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		control,
+	} = useForm<QuestRequestSchema>({
+		resolver: valibotResolver(questSchema),
+		defaultValues: {
+			title: "",
+			description: "",
+			level: levelOptions[0],
+			tags: [],
+		},
+	})
 	const [isSubmitting, setIsSubmitting] = useState(false)
+	const id = useId()
 
 	const router = useRouter()
 	const tagOptions = tags.map((tag) => ({ value: tag.id, label: tag.name }))
 
-	const handleCreateTag = async (tags: Option[]) => {
-		console.log(tags)
+	const handleCreateTag = async (tags: OptionSchema[]) => {
 		if (tags.length === 0) return []
-
 		try {
 			const requestData: string[] = tags.map((tag) => tag.value)
 			const res = await postTag(requestData)
@@ -43,23 +51,16 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 		return []
 	}
 
-	const handleSubmit = async () => {
-		if (title === "" || description === "") {
-			alert("1文字以上入力してください")
-			return
-		}
+	const onSubmit = async (data: QuestRequestSchema) => {
 		setIsSubmitting(true)
-		console.log(selectedTags)
 		const newTags: string[] = await handleCreateTag(
-			selectedTags.filter((tag) => tag.__isNew__ !== undefined)
+			data.tags.filter((tag) => tag.__isNew__ !== undefined)
 		)
-
 		try {
 			const requestData: QuestRequest = {
-				title,
-				description,
-				level: selectedLevel.value,
-				tags: selectedTags
+				...data,
+				level: parseInt(data.level.value),
+				tags: data.tags
 					.filter((tag) => tag.__isNew__ === undefined)
 					.map((tag) => tag.value)
 					.concat(newTags),
@@ -76,49 +77,72 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 
 	return (
 		<form className="flex flex-col gap-4">
-			<label className="flex flex-col gap-1">
-				<span>クエスト名</span>
+			<FieldWrap
+				labelText="クエスト名"
+				htmlFor={`${id}-title`}
+				error={errors.title}
+			>
 				<input
-					value={title}
-					onChange={(e) => setTitle(e.target.value)}
+					id={`${id}-title`}
 					placeholder="クエスト名"
 					className="w-full border border-gray-400 rounded-md p-2"
+					{...register("title")}
 				/>
-			</label>
-			<label className="flex flex-col gap-1">
-				<span>クエストの説明</span>
+			</FieldWrap>
+			<FieldWrap
+				labelText="クエストの説明"
+				htmlFor={`${id}-description`}
+				error={errors.description}
+			>
 				<textarea
-					value={description}
-					onChange={(e) => setDescription(e.target.value)}
+					id={`${id}-description`}
 					placeholder="クエストの説明"
 					className="w-full min-h-[128px] border border-gray-400 rounded-md p-2"
+					{...register("description")}
 				/>
-			</label>
-			<label className="flex flex-col gap-1">
-				<span>難易度</span>
-				<Select
-					placeholder="難易度"
+			</FieldWrap>
+			<FieldWrap
+				labelText="難易度"
+				htmlFor={`${id}-level`}
+				error={errors.level}
+			>
+				<Controller
 					name="level"
-					options={levelOptions}
-					defaultValue={levelOptions[0]}
-					onChange={(val) => (val ? setSelectedLevel(val) : null)}
+					control={control}
+					render={({ field }) => (
+						<Select
+							id={`${id}-level`}
+							placeholder="難易度"
+							options={levelOptions}
+							{...field}
+						/>
+					)}
 				/>
-			</label>
-			<label className="flex flex-col gap-1">
-				<span>タグ</span>
-				<CreatableSelect
-					placeholder="タグ"
-					isMulti
+			</FieldWrap>
+			<FieldWrap
+				labelText="タグ"
+				htmlFor={`${id}-tags`}
+				error={errors.tags?.[0]}
+			>
+				<Controller
 					name="tags"
-					options={tagOptions}
-					onChange={(val) => (val ? setSelectedTags([...val]) : null)}
+					control={control}
+					render={({ field }) => (
+						<CreatableSelect
+							id={`${id}-tags`}
+							placeholder="タグ"
+							isMulti
+							options={tagOptions}
+							{...field}
+						/>
+					)}
 				/>
-			</label>
+			</FieldWrap>
 			<div className="text-right">
 				<button
 					className="bg-blue-200 hover:bg-blue-300 px-4 py-2 rounded-xl"
 					type="button"
-					onClick={handleSubmit}
+					onClick={handleSubmit(onSubmit)}
 					disabled={isSubmitting}
 				>
 					申請を送信
