@@ -86,6 +86,8 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 					id={`${id}-title`}
 					placeholder="クエスト名"
 					className="w-full border border-gray-400 rounded-md p-2"
+					aria-invalid={!!errors.title}
+					aria-errormessage={`${id}-title-error`}
 					{...register("title")}
 				/>
 			</FieldWrap>
@@ -98,6 +100,8 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 					id={`${id}-description`}
 					placeholder="クエストの説明"
 					className="w-full min-h-[128px] border border-gray-400 rounded-md p-2"
+					aria-invalid={!!errors.description}
+					aria-errormessage={`${id}-title-error`}
 					{...register("description")}
 				/>
 			</FieldWrap>
@@ -111,9 +115,11 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 					control={control}
 					render={({ field }) => (
 						<Select
-							id={`${id}-level`}
+							inputId={`${id}-level`}
 							placeholder="難易度"
 							options={levelOptions}
+							aria-invalid={!!errors.level}
+							aria-errormessage={`${id}-title-error`}
 							{...field}
 						/>
 					)}
@@ -122,17 +128,19 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 			<FieldWrap
 				labelText="タグ"
 				htmlFor={`${id}-tags`}
-				error={errors.tags?.[0]}
+				error={errors.tags?.[0] /*todo: 複数で1つのエラーとして扱いたい*/}
 			>
 				<Controller
 					name="tags"
 					control={control}
 					render={({ field }) => (
 						<CreatableSelect
-							id={`${id}-tags`}
+							inputId={`${id}-tags`}
 							placeholder="タグ"
 							isMulti
 							options={tagOptions}
+							aria-invalid={!!errors.tags?.[0]}
+							aria-errormessage={`${id}-title-error`}
 							{...field}
 						/>
 					)}

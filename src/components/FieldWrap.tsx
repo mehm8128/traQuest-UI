@@ -17,7 +17,9 @@ export default function FieldWrap({
 				<span>{labelText}</span>
 			</label>
 			{children}
-			<div className="h-4 text-red-400">{error?.message?.toString()}</div>
+			<div className="h-3 text-red-400" id={`${htmlFor}-error`}>
+				{error?.message?.toString()}
+			</div>
 		</div>
 	)
 }
