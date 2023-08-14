@@ -101,7 +101,7 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 					placeholder="クエストの説明"
 					className="w-full min-h-[128px] border border-gray-400 rounded-md p-2"
 					aria-invalid={!!errors.description}
-					aria-errormessage={`${id}-title-error`}
+					aria-errormessage={`${id}-description-error`}
 					{...register("description")}
 				/>
 			</FieldWrap>
@@ -119,7 +119,7 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 							placeholder="難易度"
 							options={levelOptions}
 							aria-invalid={!!errors.level}
-							aria-errormessage={`${id}-title-error`}
+							aria-errormessage={`${id}-level-error`}
 							{...field}
 						/>
 					)}
@@ -140,7 +140,7 @@ export default function QuestRequestForm({ tags }: { tags: Tag[] }) {
 							isMulti
 							options={tagOptions}
 							aria-invalid={!!errors.tags?.[0]}
-							aria-errormessage={`${id}-title-error`}
+							aria-errormessage={`${id}-tags-error`}
 							{...field}
 						/>
 					)}

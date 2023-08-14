@@ -1,5 +1,6 @@
 import { postQuest } from "@/clients/quests/apis"
 import { QuestRequest } from "@/clients/quests/types"
+import { quest as questFixture } from "./fixtures"
 import axios from "axios"
 
 jest.mock("axios")
@@ -13,18 +14,7 @@ describe("postQuests", () => {
 			tags: [],
 		}
 		const quest = {
-			data: {
-				id: "1",
-				number: 1,
-				title: "title",
-				level: 1,
-				completedCount: 0,
-				description: "description",
-				tags: [],
-				createdAt: "2021-01-01T00:00:00.000Z",
-				updatedAt: "2021-01-01T00:00:00.000Z",
-				completed: false,
-			},
+			data: questFixture,
 		}
 		jest.spyOn(axios, "post").mockResolvedValue(quest)
 		await expect(postQuest(requestBody)).resolves.toMatchObject(quest.data)
