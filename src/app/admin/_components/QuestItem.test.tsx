@@ -5,12 +5,12 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import axios from "axios"
 
-jest.mock("axios")
+vi.mock("axios")
 const user = userEvent.setup()
 
 test("承認できる", async () => {
-	const mockFetchFn = jest.spyOn(axios, "post")
-	const mockSetFn = jest.fn()
+	const mockFetchFn = vi.spyOn(axios, "post")
+	const mockSetFn = vi.fn()
 	render(
 		<RecoilProvider>
 			<QuestItem questItem={quest} setQuests={mockSetFn} />
@@ -22,8 +22,8 @@ test("承認できる", async () => {
 })
 
 test("却下できる", async () => {
-	const mockFetchFn = jest.spyOn(axios, "post")
-	const mockSetFn = jest.fn()
+	const mockFetchFn = vi.spyOn(axios, "post")
+	const mockSetFn = vi.fn()
 	render(
 		<RecoilProvider>
 			<QuestItem questItem={unapprovedQuest} setQuests={mockSetFn} />

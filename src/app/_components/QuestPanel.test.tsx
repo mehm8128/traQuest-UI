@@ -1,4 +1,4 @@
-import QuestPanel from "@/app/_components/QuestPanel"
+import QuestPanel from "./QuestPanel"
 import { quest } from "@/clients/quests/fixtures"
 import { render, screen } from "@testing-library/react"
 
@@ -7,6 +7,10 @@ test("completedなときに済が表示される", () => {
 	expect(screen.getByText("済")).toBeInTheDocument()
 })
 test("completedでないときに済が表示されない", () => {
-	render(<QuestPanel quest={quest} />)
+	const uncompletedQuest = {
+		...quest,
+		completed: false,
+	}
+	render(<QuestPanel quest={uncompletedQuest} />)
 	expect(screen.queryByText("済")).not.toBeInTheDocument()
 })

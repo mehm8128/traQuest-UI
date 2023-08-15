@@ -1,5 +1,6 @@
-import QuestLevel from "@/components/QuestLevel"
-import { render, screen, within } from "@testing-library/react"
+import QuestLevel from "./QuestLevel"
+import { render, screen } from "@testing-library/react"
+import { expect, test } from "vitest"
 
 test("★がレベル分表示される", () => {
 	render(<QuestLevel level={3} />)

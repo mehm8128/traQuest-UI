@@ -6,21 +6,25 @@ import * as tagApis from "@/clients/tags/apis"
 import selectEvent from "react-select-event"
 import { tags } from "@/clients/tags/fixtures"
 
-jest.mock("next/navigation", () => require("next-router-mock"))
-jest.mock("@/clients/quests/apis")
-jest.mock("@/clients/tags/apis")
+vi.mock("next/navigation", () => ({
+	useRouter: () => import("next-router-mock"),
+}))
+vi.mock("window", () => ({
+	alert: () => {},
+}))
+vi.mock("@/clients/quests/apis")
+vi.mock("@/clients/tags/apis")
 const user = userEvent.setup()
 
 const setup = async () => {
-	const mockCreateQuestFn = jest.spyOn(questApis, "postQuest")
-	const mockCreateTagFn = jest.spyOn(tagApis, "postTag").mockResolvedValue([
+	const mockCreateQuestFn = vi.spyOn(questApis, "postQuest")
+	const mockCreateTagFn = vi.spyOn(tagApis, "postTag").mockResolvedValue([
 		{
 			id: "tag4",
 			name: "tag4",
 			createdAt: "",
 		},
 	])
-	jest.spyOn(window, "alert").mockImplementation(() => {})
 	render(<QuestRequestForm tags={tags} />)
 
 	const inputTitle = async () => {

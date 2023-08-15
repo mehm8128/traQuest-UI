@@ -4,12 +4,12 @@ import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import axios from "axios"
 
-jest.mock("axios")
+vi.mock("axios")
 const user = userEvent.setup()
 
 test("uncompletedなときにcompleteできる", async () => {
-	const mockFetchFn = jest.spyOn(axios, "post")
-	const mockSetFn = jest.fn()
+	const mockFetchFn = vi.spyOn(axios, "post")
+	const mockSetFn = vi.fn()
 	render(
 		<RecoilProvider>
 			<CompleteButton
@@ -27,7 +27,7 @@ test("uncompletedなときにcompleteできる", async () => {
 })
 
 test("completedなときにボタンがdisabled", async () => {
-	const mockSetFn = jest.fn()
+	const mockSetFn = vi.fn()
 	render(
 		<RecoilProvider>
 			<CompleteButton
